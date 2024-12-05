@@ -1,0 +1,23 @@
+using UnityEngine;
+
+public class CameraFollow2D : MonoBehaviour
+{
+    public Transform target; // The character to follow
+    public Vector3 offset;   // Offset from the character
+    public float smoothSpeed = 0.125f; // Smoothness of camera movement
+
+    void FixedUpdate()
+    {
+        if (target != null)
+        {
+            // Target position with offset
+            Vector3 desiredPosition = target.position + offset;
+
+            // Smoothly interpolate the camera position
+            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+
+            // Update camera position
+            transform.position = new Vector3(smoothedPosition.x, smoothedPosition.y, transform.position.z);
+        }
+    }
+}
