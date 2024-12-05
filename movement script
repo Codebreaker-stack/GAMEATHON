@@ -11,6 +11,11 @@ public class PlayerMovement : MonoBehaviour
     {
         // Get the Rigidbody2D component attached to the player
         rb = GetComponent<Rigidbody2D>();
+
+        if (rb == null)
+        {
+            Debug.LogError("Rigidbody2D component is missing from the player object.");
+        }
     }
 
     // Update is called once per frame
@@ -19,13 +24,20 @@ public class PlayerMovement : MonoBehaviour
         // Get player input (WASD or Arrow keys)
         movement.x = Input.GetAxisRaw("Horizontal");  // Left/Right movement (A/D or Arrow keys)
         movement.y = Input.GetAxisRaw("Vertical");    // Up/Down movement (W/S or Arrow keys)
+        
+        // Debugging input values
+        Debug.Log("Input X: " + movement.x + " Input Y: " + movement.y);
     }
 
     // FixedUpdate is called on a fixed time interval (better for physics)
     void FixedUpdate()
     {
         // Move the player by applying velocity to the Rigidbody2D
-        rb.velocity = movement * moveSpeed;
+        if (rb != null)
+        {
+            rb.velocity = movement * moveSpeed;
+        }
     }
 }
+
  
