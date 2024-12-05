@@ -1,24 +1,2 @@
-using UnityEngine;
-
-public class CameraFollow2D : MonoBehaviour
-{
-    public Transform target; // The character to follow
-    public float smoothSpeed = 0.125f; // Smoothness of the camera movement
-    public float offsetX = 2f; // Horizontal offset
-
-    void FixedUpdate()
-    {
-        if (target != null)
-        {
-            // Calculate the desired horizontal position
-            float desiredX = target.position.x + offsetX;
-
-            // Smoothly move the camera horizontally
-            float smoothedX = Mathf.Lerp(transform.position.x, desiredX, smoothSpeed);
-
-            // Update the camera position (only X-axis changes)
-            transform.position = new Vector3(smoothedX, transform.position.y, transform.position.z);
-        }
-    }
-}
+ 
 
